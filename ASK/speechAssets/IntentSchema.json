@@ -1,0 +1,30 @@
+{
+ "intents": [
+ {
+  "intent": "MyIntent",
+   "slots": [
+   {
+    "name": "device",
+    "type": "LIST_OF_DEVICES"
+   },
+   {
+     "name": "dimming",
+     "type": "LIST_OF_DIMMING"
+   },
+     {
+       "name": "location",
+       "type": "LIST_OF_LOCATIONS"
+     }
+  ]
+ },
+ {
+  "intent": "AMAZON.HelpIntent"
+ },
+ {
+  "intent": "AMAZON.StopIntent"
+ },
+ {
+  "intent": "AMAZON.CancelIntent"
+ }
+ ]
+}
