@@ -1,37 +1,6 @@
-MyIntent toggle {device}
-MyIntent to toggle {device}
-MyIntent toggle {device} light
-MyIntent to toggle the {device} light
-MyIntent {device} {dimming}
-MyIntent {device} light {dimming}
-MyIntent set {device} {dimming}
-MyIntent to set {device} {dimming}
-MyIntent to set the {device} {dimming}
-MyIntent set {device} light {dimming}
-MyIntent set {device} to {dimming}
-MyIntent set the {device} to {dimming}
-MyIntent to set the {device} to {dimming}
-MyIntent set {device} light to {dimming}
-MyIntent to set {device} light to {dimming}
-MyIntent to set the {device} light to {dimming}
-MyIntent turn {device} {dimming}
-MyIntent to turn {device} {dimming}
-MyIntent turn {device} light {dimming}
-MyIntent to turn {device} light {dimming}
-MyIntent to turn the {device} light {dimming}
-MyIntent turn {dimming} {device}
-MyIntent to turn {dimming} {device}
-MyIntent turn {dimming} {device} light
-MyIntent to turn {dimming} {device} light
-MyIntent {dimming} {device}
-MyIntent to {dimming} {device}
-MyIntent {dimming} {device} light
-MyIntent to {dimming} {device} light
-MyIntent {dimming} the {device}
-MyIntent to {dimming} the {device}
-MyIntent {dimming} the {device} light
-MyIntent to {dimming} the {device} light
-MyIntent turn {dimming} the {device}
-MyIntent to turn {dimming} the {device}
-MyIntent turn {dimming} the {device} light
-MyIntent to turn {dimming} the {device} light
+ParticleIntent {command}
+ParticleIntent turn {command}
+ParticleIntent to turn {command}
+ParticleIntent thing {command}
+ParticleIntent turn thing {command}
+ParticleIntent to turn thing {command}
