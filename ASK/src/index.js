@@ -1,28 +1,22 @@
 /**
  * App ID for the skill
+ * Update and use this if/when you publish your skill publicly
  */
 var APP_ID = undefined; //replace with "amzn1.echo-sdk-ams.app.[your-unique-value-here]";
 
-// Replace these with action device id and access token
+// Replace these with your particle.io device id and access token
 var deviceid = "<your-unique-value-here>";
 var accessToken = "<your-unique-value-here>";
 
 /**
  * The AlexaSkill prototype and helper functions
+ * Particle is a child of AlexaSkill.
  */
-
 var http = require('https');
 var AlexaSkill = require('./AlexaSkill');
-
-/*
- *
- * Particle is a child of AlexaSkill.
- *
- */
 var Particle = function () {
     AlexaSkill.call(this, APP_ID);
 };
-
 // Extend AlexaSkill
 Particle.prototype = Object.create(AlexaSkill.prototype);
 Particle.prototype.constructor = Particle;

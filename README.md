@@ -1,20 +1,44 @@
 # alexaParticleBridge
-Instructions and sample code to connect Amazon Echo Alexa to Particle.io API
 
-It is based partly on krvarma / Particle_Alexa: https://github.com/krvarma/Particle_Alexa.
-I recommend reading that also. This example then goes quite a ways beyond that to handle multiple intents and invocations.
+Instructions and sample code to connect an Amazon Echo using Alexa voice commands to a Particle.io compatible Arduino
 
- I am using a Photon to provide a bridge between the Echo and my Arduino RF24 network. While this makes the Arduino code a bit more complicated, I believe that it provides a much more extensible solution.
+I've used information from a several sources, including the Amazon developer doc, the [Particle_Alexa package on GitHub]( https://github.com/krvarma/Particle_Alexa), and some collaboration with my buddy Don. My intent is to fill in some gaps, provide answers to some puzzles that I ran into, and provide an easy to use template for both yours and my own future projects.
+
+I am using a Photon to provide a bridge between the Echo and my Arduino RF24 network. I've removed this code to keep things simple, but can provide examples if anyone is interested.
 
 **What you will need**
-You will need a free Amazon account and membership in the Amazon developer
-program to create the needed Alexa SKill Kit and Lambda components.
 
-You will also need a Particle.io account, and compatible Arduino part to connect with. I recommend the Particle.io Photon, which is $19 as of January, 2016. I'm also looking forward to completion of the Digistump Oak, which will be only $10 each, and supports Particle.io.
+1. A free Amazon Web Services (AWS) account
+1. A free account on the Amazon developer portal
+1. A free Particle.io account
+1. A Particle.io compatible Arduino, such as the Photon or Oak
 
-The Alexa Skills Kit provides a simulator to help testing your code. This allows you to type what you would say, instead of talking to an actual Echo device. You will need an Amazon Echo to actually speak to.
+I recommend the Particle.io Photon, which is $19 as of January, 2016.
+
+I'm also looking forward to completion of the Digistump Oak, which will cost only $10 each, and promises Particle.io support.
+
+The Alexa Skills Kit provides a simulator to help testing your code. This allows you to type what you would say, instead of talking to an actual Echo device. You will need an Amazon Echo to actually speak to. But this allows anyone to experiment with Alexa support, even if they don't own or have access to an Echo.
+
+**Create an AWS Account**
+
+An AWS account is free, but you will need a valid credit card to setup an account.
+1. Go to aws.amazon.com and choose Create a Free AWS Account.
+2. Follow the instructions. Don't worry about the IAM role, we'll do that later.
+2. You'll need to enter your credit card info, even though this is a free tier.
+2. Follow the confirmation process to activate your account.
+1. Sign into the Console
+2. It may take awhile for your new account to become active.
+2. You will receive an email when your account is activated
+
+**Create a free Amazon Develop Portal account**
+
+1. Go to developer.amazon.com and then select Alexa
+1. Select Create Free Account (in the upper right)
+2. Follow the instructions to create your account
+
 
 **One-Shot Modal**
+
 There are currently 3 different modes for interacting with Alexa. The first, and easiest, to to speak a complete command in one sentence, as shown below.
 
 User: *Alexa, tell particle to turn on booth light*
@@ -97,6 +121,7 @@ In our application we check the slots and call appropriate functions in our firm
 
 
 ### Installation
+
 *These installation steps are taken from one of the Alexa Skill Set sample.*
 
 ***AWS Lambda Setup***
