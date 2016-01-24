@@ -1,14 +1,22 @@
 # alexaParticleBridge
 
-AlexaParticleBridge provides instructions and sample code to connect an Amazon Echo to a Particle.io compatible Arduino using Alexa spoken voice commands.
+AlexaParticleBridge provides instructions and sample code to connect an
+Amazon Echo to a Particle.io compatible Arduino using Alexa spoken
+voice commands.
 
-This will let you "talk" to your Amazon Echo, and use what you say to invoke a function running on an Arduino.
+This will let you "talk" to your Amazon Echo, and use what you say to
+invoke a function running on an Arduino.
 
-I've used information from a several sources, including the Amazon developer doc, a [one hour tutorial](https://developer.amazon.com/public/community/post/TxDJWS16KUPVKO/New-Alexa-Skills-Kit-Template-Build-a-Trivia-Skill-in-under-an-Hour) by Kevin Utter, the [Particle_Alexa package on GitHub]( https://github.com/krvarma/Particle_Alexa) by Krishnaraj Varma, and some collaboration with my buddies Dan, Don and Sean. Thanks, guys!
+I've used information from a several sources, including the Amazon developer doc,
+a [one hour tutorial](https://developer.amazon.com/public/community/post/TxDJWS16KUPVKO/New-Alexa-Skills-Kit-Template-Build-a-Trivia-Skill-in-under-an-Hour)
+by Kevin Utter, the [Particle_Alexa package on GitHub]( https://github.com/krvarma/Particle_Alexa)
+by Krishnaraj Varma, and some collaboration with my buddies Dan, Don and Sean.
+Thanks, guys!
 
-My intent is to fill in some gaps, provide answers to some puzzles that we ran into, and provide an easy to use template for projects.
+My intent is to fill in some gaps, provide answers to some puzzles that
+we ran into, and provide an easy to use template for projects.
 
-**What you will need**
+## What you will need
 
 1. A free Amazon Web Services (AWS) account
 1. A free account on the Amazon developer portal
@@ -17,28 +25,36 @@ My intent is to fill in some gaps, provide answers to some puzzles that we ran i
 
 I recommend the Particle.io Photon, which is $19 as of January, 2016.
 
-I'm also looking forward to completion of the Digistump Oak, which will cost only $10 each, and promises Particle.io support.
+I'm also looking forward to completion of the Digistump Oak,
+which will cost only $10 each, and promises Particle.io support.
 
-The Alexa Skills Kit provides a simulator to help testing your code. This allows you to type what you would say, instead of talking to an actual Echo device. You will need an Amazon Echo to actually speak to. But this allows anyone to experiment with Alexa support, even if they don't own or have access to an Echo.
+The Alexa Skills Kit provides a simulator to help testing your code.
+This allows you to type what you would say, instead of talking to an
+actual Echo device. You will need an Amazon Echo to actually speak to.
+But this allows anyone to experiment with Alexa support, even if they
+don't own or have access to an Echo.
 
-**Create an AWS Account**
+## Create an AWS Account
 
-An AWS account is free, but you will need a valid credit card to setup an account.
+An AWS account is free, but you will need a valid credit card to setup
+an account.
 1. Go to aws.amazon.com and choose Create a Free AWS Account.
-2. Follow the instructions. Don't worry about the IAM role, we'll do that later.
-2. You'll need to enter your credit card info, even though this is a free tier.
+2. Follow the instructions. Don't worry about the IAM role,
+we'll do that later.
+2. You'll need to enter your credit card info, even though this is a
+free tier.
 2. Follow the confirmation process to activate your account.
 1. Sign into the Console
 2. It may take awhile for your new account to become active.
 2. You will receive an email when your account is activated
 
-**Create a free Amazon Develop Portal account**
+## Create a free Amazon Develop Portal account
 
 1. Go to developer.amazon.com and then select Alexa
 1. Select Create Free Account (in the upper right)
 2. Follow the instructions to create your account
 
-**Connect Particle.io to your arduino**
+## Connect Particle.io to your arduino
 
 If you haven't already associated your Arduino with your particle.io account,
 you'll need to do so. This should be very simple.
@@ -46,42 +62,62 @@ Refer to the particle.io help if you run into any problems:
 1. Power-up your new particle
 2. Go to your particle.io dashboard and connect to the new device
 
-**Create a free particle.io account**
+## Create a free particle.io account
 
 1. Go to the [particle.io dashboard](https://dashboard.particle.io)
 2. Select Signup for an account
 
-**Starting with a Simple Skill**
+## Starting with a Simple Skill
 
-Amazon has named code that extends Alexa a "Skill", as opposed to an "app" or a "program". For this example, we're going to create a simple skill, keeping it about as simple as possible.
-Once you know how to get something simple working, I think that you will find it easy to extend to handle more complex interactions.
+Amazon has named code that extends Alexa a "Skill", as opposed to an "app"
+or a "program". For this example, we're going to create a simple skill,
+keeping it about as simple as possible.
+Once you know how to get something simple working, I think that you will
+find it easy to extend to handle more complex interactions.
 
 So what we're going to build is an Alexa Skill that can
-respond to a few simple on/off commands. We will enable our skill to understand the following sentences:
+respond to a few simple on/off commands. We will enable our skill to
+understand the following sentences:
 
 * "Alexa, tell **Particle** to **turn on**"
 * "Alexa, ask **Particle** to **turn off**"
 
-**Wake Word**
+## Wake Word
 
-In order to interact with Echo, the user must first wake it up. This is done by speaking the word "Alexa". Once awoken, Alexa then listens for an invocation name to select the skill to invoke.
+In order to interact with Echo, the user must first wake it up.
+This is done by speaking the word "Alexa". Once awoken, Alexa then
+listens for an invocation name to select the skill to invoke.
 
-**Invocation Name**
+## Invocation Name
 
-So the first thing that a skill needs is an invocation name. In the above example, the invocation name is **Particle**. It is the thing that causes Alexa to launch our Skill. The Amazon Doc [Choosing the Invocation Name for an Alexa Skill](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/choosing-the-invocation-name-for-an-alexa-skill) provides a lot of information about choosing a good invocation name, but basically it needs to be several syllables long, and best if not similar to words that Alexa already recognizes as a command. So the word "Particle" is pretty good, since it is fairly unique and 3 syllables. But using the word "weather" would not be good because Alexa already responds to that word.
+So the first thing that a skill needs is an invocation name.
+In the above example, the invocation name is **Particle**.
+It is the thing that causes Alexa to launch our Skill.
+The Amazon Doc [Choosing the Invocation Name for an Alexa
+Skill](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/choosing-the-invocation-name-for-an-alexa-skill)
+provides a lot of information about choosing a good invocation name,
+but basically it needs to be several syllables long, and best if not
+similar to words that Alexa already recognizes as a command.
+So the word "Particle" is pretty good, since it is fairly unique and
+3 syllables. But using the word "weather" would not be good because
+Alexa already responds to that word.
 
-**Creating an Alexa Skill**
+## Creating an Alexa Skill
 
-So now that your accounts are setup, and you've decided what invocation name to use, we're ready to go ahead an create a new Alexa Skill that will invoke a function on our Photon. You'll need to do 4 things:
+So now that your accounts are setup, and you've decided what invocation
+name to use, we're ready to go ahead an create a new Alexa Skill that
+will invoke a function on our Photon. You'll need to do 4 things:
 
 1. Create a web service that will process the voice input
   * We'll create an AWS lambda function to do this.
-  * Don't worry, this will be mostly cut-and-paste, with a couple edits to provide your own specific account information.
+  * Don't worry, this will be mostly cut-and-paste, with a couple edits
+  to provide your own specific account information.
 2. Use the Alexa Skill Kit portal to configure our Alexa skill
   * List the sentences that Alexa will recognize
-  * Provide lists of any variable information we want to use in our sentences. For example, the words "on" and "off" in our example.
+  * Provide lists of any variable information we want to use in our sentences.
+  For example, the words "on" and "off" in our example.
 
-**Create an AWS Lambda Function**
+## Create an AWS Lambda Function
 
 This is probably the most difficult part of this process.
 I've tried to simplify it as much as possible.
@@ -92,7 +128,7 @@ The first step will be to edit the javascript files included in
 this package to add your particular account and device information.
 then you'll need to upload them to your AWS account.
 
-***Editing the Javascript Files***
+### Editing the Javascript Files
 
 The javascript files are located in the ASK folder of the repository.
 1. The AlexaSkill.js file is boiler plate code, and does not
@@ -108,12 +144,13 @@ The javascript files are located in the ASK folder of the repository.
 4. Now save your changes, and zip both files up in a single archive file.
   You'll need the archive file in the next section.
 
-***Configure the Lambda Function***
+### Configure the Lambda Function
 
 1. Sign into your AWS account console
 2. Select ***US East (N. Virginia)*** region (upper right)
 3. Select ***lambda*** in compute services.
-4. Select the ***Skip*** button in the bottom right to skip selecting a blueprint.
+4. Select the ***Skip*** button in the bottom right to skip
+selecting a blueprint.
 This should take you to the "Configure Function" screen.
 5. Enter a ***Name*** and ***Description*** of your choosing.
 6. Set Runtime to ***node.js***
@@ -138,20 +175,23 @@ This should take you to the "Configure Function" screen.
   * Select ***Add event source***
   * Select type ***Alexa Skill Kit***
 14. Copy the ARN information displayed in the upper right.
-It should look something like "arn:aws:lambda:us-east-1:123456789012:function:ParticleExample"
+It should look something like
+"arn:aws:lambda:us-east-1:123456789012:function:ParticleExample"
 Copy everything after the leading "ARN -".
 We'll paste that into the Alexa portal in the upcoming steps.
 I recommend that you leave this page open so you can copy
 the ARN later when it is needed.
 
-Congratulations! You've completed the part that I found most difficult. Hopefully it was easier for you.
+**Congratulations!** You've completed the part that I found most difficult.
+Hopefully it was easier for you.
 
-**Setup Skill in the Develop Portal**
+## Setup Skill in the Develop Portal
 
 Now you will tell Alexa about the sentences you want it to
 recognize, and provide the link to the lambda function just created.
 
-1. Sign into the [Alexa SKills Kit Portal](https://developer.amazon.com/appsandservices/solutions/alexa/alexa-skills-kit)
+1. Sign into the
+[Alexa Skills Kit Portal](https://developer.amazon.com/appsandservices/solutions/alexa/alexa-skills-kit)
 by selecting ***SIGN IN*** in the upper right.
 2. Select the ***APPS & SERVICES*** tab
 3. Select ***Alexa*** in the horizontal menu near the top.
@@ -170,7 +210,7 @@ or if you copied the wrong text.
     wasn't set to Alexa Skills Kit. Go back to AWS and do so, then try
     Next again.
 
-***Interaction Model***
+### Interaction Model
 The above steps should result in display of the Interaction Model page.
 This is where we will define the things that we can say to Alexa.
 
@@ -204,7 +244,7 @@ There are several ways to test the new skill.
 * If you have an Echo, and it is associated with your account, you can test
 right away by speaking "Alexa, tell Particle to turn on"
 
-**Debugging**
+## Debugging
 
 There are a couple tools available for debugging:
 
@@ -225,3 +265,13 @@ a new timestamped log, the entries are put into the bottom of the previous log.
 Connect a USB cable to the Arduino and write debug comments in your sketch.
 Even though the Arduino can be programmed using WiFi,
 it still requires a USB cable to view console output.
+
+### References
+
+* [One Hour Tutorial](https://developer.amazon.com/public/community/post/TxDJWS16KUPVKO/New-Alexa-Skills-Kit-Template-Build-a-Trivia-Skill-in-under-an-Hour)
+* [Particle_Alexa package on GitHub](https://github.com/krvarma/Particle_Alexa)
+* [Amazon AWS](https://aws.amazon.com)
+* [Alexa Skills Kit Portal](https://developer.amazon.com/appsandservices/solutions/alexa/alexa-skills-kit)
+* [Choosing the Invocation Name for an Alexa
+Skill](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/choosing-the-invocation-name-for-an-alexa-skill)
+* [Particle.io Dashboard](https://dashboard.particle.io)

@@ -14,7 +14,15 @@ var accessToken = "put-your-particle.io-access-token-here";
  * You can leave this "myFunction", or change it later
  * if you change the sketch code.
  */
- var cloudName = "myFunction"
+var cloudName = "myFunction";
+
+/**
+ * Update skillName and invocationName to match the values
+ * that you specify in the Alexa Skill Kit.
+ * These are only used in responses from Alexa.
+ */
+var skillName = "Particle"
+var invocationName = "Particle";
 
 /**
  * App ID for the skill
@@ -38,20 +46,20 @@ Particle.prototype = Object.create(AlexaSkill.prototype);
 Particle.prototype.constructor = Particle;
 
 Particle.prototype.eventHandlers.onSessionStarted = function (sessionStartedRequest, session) {
-  console.log("Particle onSessionStarted requestId: " + sessionStartedRequest.requestId
+  console.log(invocationName + "onSessionStarted requestId: " + sessionStartedRequest.requestId
          + ", sessionId: " + session.sessionId);
      // any initialization logic goes here
 };
 
 Particle.prototype.eventHandlers.onLaunch = function (launchRequest, session, response) {
-  console.log("Particle onLaunch requestId: " + launchRequest.requestId + ", sessionId: " + session.sessionId);
-  var speechOutput = "Welcome to Particle, you can tell me to turn on or off";
-  var repromptText = "You can say hello";
+  console.log(invocationName + " onLaunch requestId: " + launchRequest.requestId + ", sessionId: " + session.sessionId);
+  var speechOutput = "Welcome to " + skillName + ", you can tell me to turn on or off";
+  var repromptText = "You can tell me to turn on or off";
   response.ask(speechOutput, repromptText);
 };
 
 Particle.prototype.eventHandlers.onSessionEnded = function (sessionEndedRequest, session) {
-  console.log("Particle onSessionEnded requestId: " + sessionEndedRequest.requestId
+  console.log(skillName + " onSessionEnded requestId: " + sessionEndedRequest.requestId
            + ", sessionId: " + session.sessionId);
   // any cleanup logic goes here
 };
@@ -79,7 +87,7 @@ Particle.prototype.intentHandlers = {
  		  makeParticleRequest(requestURI, postData, function(resp){
  		    var json = JSON.parse(resp);
  		    console.log(command + ": " + json.return_value);
- 		    response.tellWithCard("Particle", "Particle", "Thing is " + command );
+ 		    response.tellWithCard(skillName, invocationName, "Thing is " + command );
  	    });
  		} else {
  			response.tell("I don't know whether to turn thing on or off.");
@@ -87,7 +95,7 @@ Particle.prototype.intentHandlers = {
   }, // ParticleIntent
 
   "AMAZON.HelpIntent": function (intent, session, response) {
-    response.ask("You can tell me to turn on or off.");
+    response.ask("You can tell " + invocationName + " to turn on or off.");
   } // HelpIntent
 };
 
